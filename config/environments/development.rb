@@ -28,7 +28,6 @@ Rails.application.configure do
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
-
   config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
@@ -48,6 +47,9 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
+  # Using the Amazon S3 settings for Active Storage
+  config.active_storage.service = :amazon
+
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
@@ -56,4 +58,7 @@ Rails.application.configure do
   config.generators do |g|
     g.test_framework nil
   end
+
+  # Set default URL options for the mailer
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
 end

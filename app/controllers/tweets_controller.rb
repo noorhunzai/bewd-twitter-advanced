@@ -9,10 +9,11 @@ class TweetsController < ApplicationController
     session = Session.find_by(token: token)
     user = session.user
     @tweet = user.tweets.new(tweet_params)
+    
+    render 'tweets/create'
+    end
 
-    render 'tweets/create' if @tweet.save
-  end
-
+  
   def destroy
     token = cookies.signed[:twitter_session_token]
     session = Session.find_by(token: token)
@@ -43,8 +44,8 @@ class TweetsController < ApplicationController
   end
 
   private
-
-  def tweet_params
-    params.require(:tweet).permit(:message)
-  end
+    def tweet_params
+      params.require(:tweet).permit(:message, :image)
+    end
 end
+
